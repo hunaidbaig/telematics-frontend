@@ -48,7 +48,7 @@ if (document.querySelector('.fixed-plugin')) {
   var buttonNavbarFixed = document.getElementById('navbarFixed');
 
   if (fixedPluginButton) {
-    fixedPluginButton.onclick = function() {
+    fixedPluginButton.onclick = function() {classList
       if (!fixedPlugin.classList.contains('show')) {
         fixedPlugin.classList.add('show');
       } else {
@@ -403,6 +403,11 @@ let referenceButtons = document.querySelector('[data-class]');
 window.addEventListener("resize", navbarColorOnResize);
 
 function navbarColorOnResize() {
+  if (!referenceButtons || !sidenav) {
+    // Exit the function if either element is not found
+    return;
+  }
+
   if (window.innerWidth > 1200) {
     if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
       sidenav.classList.remove('bg-white');
