@@ -21,7 +21,7 @@ function NumberPlateNavbar({ toggleHandle }) {
         </div>
         <ul className="navbar-nav  justify-content-end">
           
-          <li className="nav-item d-xl-none ps-3 d-flex align-items-center">
+          <li className="nav-item d-xl-none ps-3 d-flex align-items-center"  onClick={(e)=> toggleHandle()}>
             <Link to={"#"} className="nav-link text-body p-0" id="iconNavbarSidenav">
               <div className="sidenav-toggler-inner">
                 <i className="sidenav-toggler-line"></i>
@@ -44,7 +44,7 @@ function NumberPlateNavbar({ toggleHandle }) {
                 <Link className="dropdown-item border-radius-md" to={"#"}>
                   <div className="d-flex py-1">
                     <div className="my-auto">
-                      <img src="../assets/img/team-2.jpg" className="avatar avatar-sm  me-3 "/>
+                    <img src={process.env.PUBLIC_URL + '/assets/img/team-2.jpg'} class='avatar avatar-sm  me-3 ' alt=''/>
                     </div>
                     <div className="d-flex flex-column justify-content-center">
                       <h6 className="text-sm font-weight-normal mb-1">
