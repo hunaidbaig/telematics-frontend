@@ -1,5 +1,6 @@
 import React from 'react'
 import SidebarCard from './SidebarCard'
+import { Link } from 'react-router-dom'
 
 const Sidebar = ({ dashboardToggle, toggleHandle }) => {
 
@@ -7,6 +8,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
     let sideBarList = [
         {
             title: 'Dashboard',
+            to:"/dashboard",
             svg: (
                 <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" >
                     <title>shop </title>
@@ -26,6 +28,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
 
         {
             title: 'Number Plate',
+            to:"/np",
             svg: (
                 <svg width='12px' height='12px' viewBox='0 0 42 42' version='1.1' >
                     <title>office</title>
@@ -44,6 +47,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
         },
         {
             title: 'Face Recognition',
+            to:"/fr",
             svg: (
                 <svg width='12px' height='12px' viewBox='0 0 42 42' version='1.1' >
                     <title>office</title>
@@ -67,10 +71,10 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
         <aside className={`sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3" ${dashboardToggle ?'bg-white' : ''} `} id="sidenav-main">
             <div className="sidenav-header">
                 <i className="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-xl-none" onClick={(e)=> toggleHandle()} aria-hidden="true" id="iconSidenav"></i>
-                <a className="navbar-brand m-0" href=" # " target="_blank">
+                <Link className="navbar-brand m-0" to="/" target="_blank">
                     <img src={process.env.PUBLIC_URL + "/assets/img/logo-ct.png"} className="navbar-brand-img h-100" alt="main_logo" />
                     <span className="ms-1 font-weight-bold">Welcome Hunaid Baig</span>
-                </a>
+                </Link>
             </div>
             <hr className="horizontal dark mt-0" />
             <div className="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
@@ -79,7 +83,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
                         {
                             sideBarList.map(card => {
                                 return (
-                                    <SidebarCard title={card.title} svg={card.svg} />
+                                    <SidebarCard title={card.title} svg={card.svg} to={card.to}/>
                                 )
                             })
                         }
@@ -100,7 +104,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
                         </div>
                     </div>
                 </div>
-                <a className="btn bg-gradient-primary mt-3 w-100" >Contact Us</a>
+                <Link to={"/dashboard"} className="btn bg-gradient-primary mt-3 w-100" >Contact Us</Link>
             </div>
         </aside>
     )
