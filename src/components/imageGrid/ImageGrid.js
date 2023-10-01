@@ -1,6 +1,9 @@
 // ImageGrid.js
 import React, { useState, useEffect } from "react";
 import "./ImageGrid.css";
+
+
+
 function ImageGrid() {
   const [images, setImages] = useState([]);
   const [gridClass, setGridClass] = useState("grid-2");

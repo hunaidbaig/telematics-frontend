@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Signin() {
+function SigninForm() {
   const nav = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   function handleSubmit() {
     console.log(email, password);
-    nav("/dashboard");
+    nav("/");
+
+    localStorage.setItem('user', JSON.stringify({email, password}));
   }
+  
+
+  
   return (
     <main className="main-content  mt-0">
       <section>
@@ -98,4 +104,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default SigninForm;

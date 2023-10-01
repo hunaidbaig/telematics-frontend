@@ -3,6 +3,8 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import FaceRecognitionNavbar from "./FaceRecognitionNavbar";
 import "./FaceRecognition.css";
 import ImageGrid from "../../components/imageGrid/ImageGrid";
+
+
 function FaceRecognition() {
   const [dashboardToggle, setDashboardToggle] = useState(false);
 

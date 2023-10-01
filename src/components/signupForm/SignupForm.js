@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function SignupForm() {
   const nav = useNavigate()
    const [email, setEmail] = useState("")
    const [password, setPassword] = useState("")
 
 function handleSubmit(){
     console.log(email,password)
-    nav("/dashboard")
+    nav("/")
 }
 
     return (
@@ -59,4 +59,4 @@ function handleSubmit(){
     );
 }
 
-export default Signup;
+export default SignupForm;

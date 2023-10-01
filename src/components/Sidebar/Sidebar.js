@@ -8,7 +8,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
     let sideBarList = [
         {
             title: 'Dashboard',
-            to:"/dashboard",
+            to:"/",
             svg: (
                 <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" >
                     <title>shop </title>
@@ -28,7 +28,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
 
         {
             title: 'Number Plate',
-            to:"/np",
+            to:"/number-plate",
             svg: (
                 <svg width='12px' height='12px' viewBox='0 0 42 42' version='1.1' >
                     <title>office</title>
@@ -47,7 +47,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
         },
         {
             title: 'Face Recognition',
-            to:"/fr",
+            to:"/face-recognition",
             svg: (
                 <svg width='12px' height='12px' viewBox='0 0 42 42' version='1.1' >
                     <title>office</title>

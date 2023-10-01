@@ -3,9 +3,12 @@ import { useNavigate, Link } from "react-router-dom";
 
 const DashboardNavBar = ({ toggleHandle }) => {
   const nav = useNavigate()
+
   function handleLogOut(){
-    nav("/")
+    localStorage.removeItem('user');
+    nav("/signin")
   }
+
   return (
     <nav
       class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl"
@@ -58,7 +61,7 @@ const DashboardNavBar = ({ toggleHandle }) => {
             <li>
               <form onSubmit={handleLogOut}>
                 <button
-                  type="submit"
+                  // type="submit"
                   class="btn bg-gradient-primary mt-3 w-100"
                 >
                   Logout
@@ -85,7 +88,7 @@ const DashboardNavBar = ({ toggleHandle }) => {
                 aria-labelledby="dropdownMenuButton"
               >
                 <li class="mb-2">
-                  <Link   class="dropdown-item border-radius-md" to="javascript:;">
+                  <Link   class="dropdown-item border-radius-md" to="/">
                     <div class="d-flex py-1">
                       <div class="my-auto">
                         <img
