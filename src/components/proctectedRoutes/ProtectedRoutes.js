@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const ProtectedRoutes = ({ children }) => {
 
     const navigate = useNavigate();
-    const authorization = localStorage.getItem('user');
+    const authorization = localStorage.getItem('userToken');
 
     useEffect(()=>{
         if(!authorization){

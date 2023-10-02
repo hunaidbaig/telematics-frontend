@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SigninForm() {
   const nav = useNavigate();
+  const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("")
@@ -24,7 +25,12 @@ function SigninForm() {
 
       if (response.ok) {
         console.log("Login successful!");
-        localStorage.setItem("user", JSON.stringify({ email, password }));
+
+        if(checked){
+          localStorage.setItem("rememberedCredentials", JSON.stringify({ email, password }));
+        }
+
+        localStorage.setItem("userToken", JSON.stringify({ email }));
         nav("/");
       } else {
         console.error("Login failed");
@@ -33,6 +39,36 @@ function SigninForm() {
     } catch (error) {
       console.error("Error:", error);
     }
+
+  }
+  useEffect(() => {
+    const rememberedCredentials = JSON.parse(localStorage.getItem('rememberedCredentials'));
+
+    if (rememberedCredentials) {
+      setEmail(rememberedCredentials.email);
+      setPassword(rememberedCredentials.password);
+    }
+  }, []);
+  
+
+
+
+  function handleSubmit() {
+    console.log(email, password);
+    nav("/");
+
+    if(checked){
+      localStorage.setItem('rememberedCredentials', JSON.stringify({ email, password }));
+    }
+    localStorage.setItem('userToken', JSON.stringify({email, password}));
+  }
+
+  const rememberMeHandler = ()=>{
+
+    if(email.length > 0 && password.length > 0){
+      setChecked(!checked);
+    }
+
   }
 
   return (
@@ -85,10 +121,11 @@ function SigninForm() {
                       </div>
                       <div className='form-check form-switch'>
                         <input
-                          className='form-check-input'
-                          type='checkbox'
-                          id='rememberMe'
-                          checked=''
+                          className="form-check-input"
+                          type="checkbox"
+                          id="rememberMe"
+                          checked={checked}
+                          onClick={()=> rememberMeHandler()}
                         />
                         <label className='form-check-label' for='rememberMe'>
                           Remember me

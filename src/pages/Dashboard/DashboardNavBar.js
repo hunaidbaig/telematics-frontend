@@ -5,7 +5,7 @@ const DashboardNavBar = ({ toggleHandle }) => {
   const nav = useNavigate()
 
   function handleLogOut(){
-    localStorage.removeItem('user');
+    localStorage.removeItem('userToken');
     nav("/signin")
   }
 
