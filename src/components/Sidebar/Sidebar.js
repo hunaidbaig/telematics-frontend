@@ -83,7 +83,7 @@ const Sidebar = ({ dashboardToggle, toggleHandle }) => {
                         {
                             sideBarList.map(card => {
                                 return (
-                                    <SidebarCard title={card.title} svg={card.svg} to={card.to}/>
+                                    <SidebarCard title={card.title} svg={card.svg} to={card.to} key={card.title}/>
                                 )
                             })
                         }

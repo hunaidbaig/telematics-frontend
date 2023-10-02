@@ -3,13 +3,41 @@ import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
   const nav = useNavigate()
+   const [username, setUsername] = useState("")
    const [email, setEmail] = useState("")
+   const [number, setNumber] = useState("")
    const [password, setPassword] = useState("")
 
-function handleSubmit(){
-    console.log(email,password)
-    nav("/")
-}
+   async function handleSubmit(e) {
+    e.preventDefault();
+
+      const signupData = {
+        username: username,
+        email: email,
+        number: number,
+        password: password,
+      };
+
+      try {
+        const response = await fetch("http://localhost:4000/addadmin", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(signupData),
+        });
+
+        if (response.ok) {
+          console.log("signup successful!");
+          localStorage.setItem("user", JSON.stringify({ email, password }));
+          nav("/")
+        } else {
+          console.error("signup failed");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
 
     return (
         <main className="main-content  mt-0">
@@ -27,9 +55,17 @@ function handleSubmit(){
                                     </div>
                                     <div className="card-body">
                                         <form onSubmit={handleSubmit}>
+                                            <label>Name</label>
+                                            <div className="mb-3">
+                                                <input type="text" className="form-control" placeholder="Name" aria-label="Name" name="name" aria-describedby="name-addon" required value={username} onChange={(e)=>setUsername(e.target.value)}/>
+                                            </div>
                                             <label>Email</label>
                                             <div className="mb-3">
                                                 <input type="email" className="form-control" placeholder="Email" aria-label="Email" name="email" aria-describedby="email-addon" required value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                                            </div>
+                                            <label>Number</label>
+                                            <div className="mb-3">
+                                                <input type="number" className="form-control" placeholder="Number" aria-label="Number" name="Number" aria-describedby="number-addon" required value={number} onChange={(e)=>setNumber(e.target.value)}/>
                                             </div>
                                             <label>Password</label>
                                             <div className="mb-3">
