@@ -1,17 +1,41 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SigninForm() {
   const nav = useNavigate();
+  const [checked, setChecked] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+  useEffect(() => {
+    const rememberedCredentials = JSON.parse(localStorage.getItem('rememberedCredentials'));
+
+    if (rememberedCredentials) {
+      setEmail(rememberedCredentials.email);
+      setPassword(rememberedCredentials.password);
+    }
+  }, []);
+  
+
 
 
   function handleSubmit() {
     console.log(email, password);
     nav("/");
 
-    localStorage.setItem('user', JSON.stringify({email, password}));
+    if(checked){
+      localStorage.setItem('rememberedCredentials', JSON.stringify({ email, password }));
+    }
+    localStorage.setItem('userToken', JSON.stringify({email, password}));
+  }
+
+  const rememberMeHandler = ()=>{
+
+    if(email.length > 0 && password.length > 0){
+      setChecked(!checked);
+    }
+
   }
   
 
@@ -68,7 +92,8 @@ function SigninForm() {
                           className="form-check-input"
                           type="checkbox"
                           id="rememberMe"
-                          checked=""
+                          checked={checked}
+                          onClick={()=> rememberMeHandler()}
                         />
                         <label className="form-check-label" for="rememberMe">
                           Remember me

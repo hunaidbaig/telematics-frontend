@@ -44,7 +44,7 @@ function NumberPlateNavbar({ toggleHandle }) {
                 <Link className="dropdown-item border-radius-md" to={"#"}>
                   <div className="d-flex py-1">
                     <div className="my-auto">
-                    <img src={process.env.PUBLIC_URL + '/assets/img/team-2.jpg'} class='avatar avatar-sm  me-3 ' alt=''/>
+                    <img src={process.env.PUBLIC_URL + '/assets/img/team-2.jpg'} class='avatar avatar-sm  me-3 ' alt='avatar'/>
                     </div>
                     <div className="d-flex flex-column justify-content-center">
                       <h6 className="text-sm font-weight-normal mb-1">
@@ -62,7 +62,7 @@ function NumberPlateNavbar({ toggleHandle }) {
                 <Link className="dropdown-item border-radius-md" to={"#"}>
                   <div className="d-flex py-1">
                     <div className="my-auto">
-                      <img src="../assets/img/small-logos/logo-spotify.svg" className="avatar avatar-sm bg-gradient-dark  me-3 "/>
+                      <img src="../assets/img/small-logos/logo-spotify.svg" className="avatar avatar-sm bg-gradient-dark  me-3 " alt='image-logo' />
                     </div>
                     <div className="d-flex flex-column justify-content-center">
                       <h6 className="text-sm font-weight-normal mb-1">

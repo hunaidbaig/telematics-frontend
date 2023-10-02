@@ -1,5 +1,6 @@
 // ImageGrid.js
 import React, { useState, useEffect } from "react";
+import profile from '../../images/profile.png'
 import "./ImageGrid.css";
 
 
@@ -12,18 +13,14 @@ function ImageGrid() {
     const fetchImages = async () => {
      
       const dummyImages = [
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNWr0M7oepymXhohPpSetQOlpeEvxw1rCiKQ&usqp=CAU",
+        profile,
+        profile,
+        profile,
+        profile,
+        profile,
+        profile,
+        profile,
+        profile,
       ];
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -67,7 +64,7 @@ function ImageGrid() {
             <img
               src={imageUrl}
               alt={`${index}`}
-              style={{ width: "100%" }}
+              style={{ width: "50%" }}
             />
           </div>
         ))}

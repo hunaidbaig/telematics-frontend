@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 function Signin() {
   const navigate = useNavigate();
-  const isUserLoggedIn = localStorage?.getItem('user');
+  const isUserLoggedIn = localStorage?.getItem('userToken');
   
 
   useEffect(()=>{
