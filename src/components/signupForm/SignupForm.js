@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function SignupForm() {
   const nav = useNavigate()
+  const [checked, setChecked] = useState(false)
    const [username, setUsername] = useState("")
    const [email, setEmail] = useState("")
    const [number, setNumber] = useState("")
@@ -29,7 +30,10 @@ function SignupForm() {
 
         if (response.ok) {
           console.log("signup successful!");
-          localStorage.setItem("user", JSON.stringify({ email, password }));
+          if(checked){
+            localStorage.setItem("rememberedCredentials", JSON.stringify({ email, password }));
+          }
+          localStorage.setItem("userToken", JSON.stringify({ email }));
           nav("/")
         } else {
           console.error("signup failed");
@@ -38,6 +42,24 @@ function SignupForm() {
         console.error("Error:", error);
       }
     }
+
+    useEffect(() => {
+        const rememberedCredentials = JSON.parse(localStorage.getItem('rememberedCredentials'));
+    
+        if (rememberedCredentials) {
+          setEmail(rememberedCredentials.email);
+          setPassword(rememberedCredentials.password);
+        }
+      }, []);
+
+
+    const rememberMeHandler = ()=>{
+
+        if(email.length > 0 && password.length > 0){
+          setChecked(!checked);
+        }
+    
+      }
 
     return (
         <main className="main-content  mt-0">
@@ -72,7 +94,7 @@ function SignupForm() {
                                                 <input type="password" className="form-control" placeholder="Password" aria-label="Password" name="password" aria-describedby="password-addon" required  value={password} onChange={(e)=>setPassword(e.target.value)}/>
                                             </div>
                                             <div className="form-check form-switch">
-                                                <input className="form-check-input" type="checkbox" id="rememberMe" checked="" />
+                                                <input className="form-check-input" type="checkbox" id="rememberMe" checked={checked} onClick={()=> rememberMeHandler()} />
                                                 <label className="form-check-label" for="rememberMe">Remember me</label>
                                             </div>
                                             <div className="text-center">
