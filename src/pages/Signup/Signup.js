@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Signup() {
-
   const navigate = useNavigate();
   const isUserLoggedIn = localStorage?.getItem('user');
 

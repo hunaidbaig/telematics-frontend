@@ -53,15 +53,15 @@ function SigninForm() {
 
 
 
-  function handleSubmit() {
-    console.log(email, password);
-    nav("/");
+  // function handleSubmit() {
+  //   console.log(email, password);
+  //   nav("/");
 
-    if(checked){
-      localStorage.setItem('rememberedCredentials', JSON.stringify({ email, password }));
-    }
-    localStorage.setItem('userToken', JSON.stringify({email, password}));
-  }
+  //   if(checked){
+  //     localStorage.setItem('rememberedCredentials', JSON.stringify({ email, password }));
+  //   }
+  //   localStorage.setItem('userToken', JSON.stringify({email, password}));
+  // }
 
   const rememberMeHandler = ()=>{
 
