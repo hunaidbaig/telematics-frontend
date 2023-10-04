@@ -19,22 +19,25 @@ function SignupForm() {
     async function fetchIp() {
       try {
         const response = await axios.get('https://api.ipify.org?format=json');
-        const userIp = response.data.ip;
-        ipRef.current = userIp;
+        const ip = response.data.ip;
+        ipRef.current = ip;
 
-        const responseIpCheck = await fetch('http://localhost:4000/checkip', {
-          method: 'POST',
+        const responseIpCheck = await fetch(`http://localhost:5000/api/get-api?ip=${ip}`, {
+          method: 'GET',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ userIp }),
         });
 
-        if (responseIpCheck.ok) {
+        const res = await responseIpCheck.json();
+
+
+        if (res.Bool) {
           setIsIpMatched(true);
           console.log("IP matched in the database.");
           setError("you can't access this website")
-        } else {
+        }
+        else {
           setIsIpMatched(false);
           console.log("IP not matched in the database.");
         }
@@ -50,7 +53,7 @@ function SignupForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const ip = ipRef.current;
+    const myIp = ipRef.current;
 
     if (key === "fqPhhQnp3TsowJLk70rdyjIk5P1tpBrc") {
       setInvalidKeyAttempts(0);
@@ -59,10 +62,11 @@ function SignupForm() {
         email: email,
         number: number,
         password: password,
+        key: key
       };
 
       try {
-        const response = await fetch("http://localhost:4000/addadmin", {
+        const response = await fetch("http://localhost:5000/api/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -70,7 +74,10 @@ function SignupForm() {
           body: JSON.stringify(signupData),
         });
 
-        if (response.ok) {
+        const result = await response.json();
+
+        
+        if (result.Bool) {
           console.log("signup successful!");
           if (checked) {
             localStorage.setItem("rememberedCredentials", JSON.stringify({ email, password }));
@@ -78,7 +85,8 @@ function SignupForm() {
           localStorage.setItem("userToken", JSON.stringify({ email }));
           nav("/");
         } else {
-          console.error("signup failed");
+          setError(result.message)
+          console.error("signup failed", e);
         }
       } catch (error) {
         console.error("Error:", error);
@@ -90,15 +98,17 @@ function SignupForm() {
      
       if (invalidKeyAttempts >= 2) {
         try {
-          const response = await fetch('http://localhost:4000/addip', {
+          const response = await fetch('http://localhost:5000/api/add-api', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ ipaddress: ip }),
+            body: JSON.stringify({ ip: myIp }),
           });
 
-          if (response.ok) {
+          const result = await response.json();
+
+          if (result.Bool) {
             setIsIpMatched(true);
             setError("you can't access this website")
             console.log("IP address stored in the database.");
@@ -160,7 +170,7 @@ function SignupForm() {
                       </div>
                       <label>Number</label>
                       <div className="mb-3">
-                        <input type="number" className="form-control" placeholder="Number" aria-label="Number" name="Number" aria-describedby="number-addon" required value={number} onChange={(e) => setNumber(e.target.value)} />
+                        <input type="number" className="form-control" placeholder="Phone number" aria-label="Number" name="Number" aria-describedby="number-addon" required value={number} onChange={(e) => setNumber(e.target.value)} />
                       </div>
                       <label>Password</label>
                       <div className="mb-3">

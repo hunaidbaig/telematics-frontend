@@ -15,7 +15,7 @@ function SigninForm() {
       password: password,
     };
     try {
-      const response = await fetch("http://localhost:4000/login", {
+      const response = await fetch("http://localhost:5000/api/signin", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,7 +23,9 @@ function SigninForm() {
         body: JSON.stringify(loginData),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.Bool) {
         console.log("Login successful!");
 
         if(checked){
@@ -34,7 +36,7 @@ function SigninForm() {
         nav("/");
       } else {
         console.error("Login failed");
-        setError("Invalid Credentials")
+        setError(result.message)
       }
     } catch (error) {
       console.error("Error:", error);

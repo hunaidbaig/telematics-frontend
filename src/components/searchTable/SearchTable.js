@@ -1,20 +1,21 @@
 import React, { useState } from "react";
 import "./searchTable.css";
-const SearchTable = ({ data }) => {
+const SearchTable = ({ data, loading }) => {
   const [filter, setFilter] = useState("");
-  const [selectedFilter, setSelectedFilter] = useState("carNo");
+  const [selectedFilter, setSelectedFilter] = useState("car_id");
+
 
   const filteredData = data.filter((item) => {
     const searchBy =
-      selectedFilter === "carid"
-        ? item.carid.toString()
-        : selectedFilter === "date"
-        ? item.date
-        : selectedFilter === "serialNo"
-        ? item.serialNo
-        : item.carNo;
+      selectedFilter === "car_id"
+        ? item.car_id.toString()
+        : selectedFilter === "processed_time"
+        ? item.processed_time
+        : selectedFilter === "license_number_score"
+        ? item.license_number_score
+        : item.license_number;
 
-    return searchBy.toLowerCase().includes(filter.toLowerCase());
+    return searchBy?.toLowerCase().includes(filter.toLowerCase());
   });
 
   return (
@@ -30,34 +31,36 @@ const SearchTable = ({ data }) => {
                 onChange={(e) => setFilter(e.target.value)}
                 className="form-control"
               />
-              <select
-                value={selectedFilter}
-                onChange={(e) => setSelectedFilter(e.target.value)}
-                className="form-select"
-              >
-                <option value="carNo">Car No</option>
-                <option value="date">Date</option>
-                <option value="serialNo">Serial No</option>
-                <option value="carid">Car ID</option>
-              </select>
             </div>
+            <select
+              value={selectedFilter}
+              onChange={(e) => setSelectedFilter(e.target.value)}
+              className="form-control bg-gradient-primary" style={{
+                color:"white",
+                marginTop: '0.5rem'
+              }}
+            >
+              <option value="license_number">License Number</option>
+              <option value="processed_time">Date</option>
+              <option value="license_number_score ">License No score</option>
+            </select>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                    {/* <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                       Car ID
-                    </th>
+                    </th> */}
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                       Date
                     </th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Car No
+                      License number 
                     </th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                      Serial No
+                      license Number Score
                     </th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                       Image
@@ -65,17 +68,17 @@ const SearchTable = ({ data }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredData.map((item) => (
-                    <tr key={item.carid}>
+                  { loading ? <p>loading</p> : filteredData.map((item, index) => (
+                    <tr key={index}>
+                      {/* <td class="text-xs font-weight-bold mb-0 text-secondary">
+                        {item.car_id}
+                      </td> */}
+                      <td class="text-xs font-weight-bold mb-0 text-secondary">{item.processed_time}</td>
                       <td class="text-xs font-weight-bold mb-0 text-secondary">
-                        {item.carid}
+                        {item.license_number}
                       </td>
-                      <td class="text-xs font-weight-bold mb-0 text-secondary">{item.date}</td>
                       <td class="text-xs font-weight-bold mb-0 text-secondary">
-                        {item.carNo}
-                      </td>
-                      <td class="text-xs font-weight-bold mb-0 text-secondary">
-                        {item.serialNo}
+                        {item.license_number_score}
                       </td>
                       <td class="text-xs font-weight-bold mb-0 ">
                         <img src={item.image} alt="" width="50" />

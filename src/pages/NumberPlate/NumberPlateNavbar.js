@@ -94,7 +94,7 @@ function NumberPlateNavbar({ toggleHandle }) {
                         </g>
                       </svg> */}
                     </div>
-                    <div className="d-flex flex-column justify-content-center">
+                    {/* <div className="d-flex flex-column justify-content-center">
                       <h6 className="text-sm font-weight-normal mb-1">
                         Payment successfully completed
                       </h6>
@@ -102,7 +102,7 @@ function NumberPlateNavbar({ toggleHandle }) {
                         <i className="fa fa-clock me-1"></i>
                         2 days
                       </p>
-                    </div>
+                    </div> */}
                   </div>
                </Link>
               </li>
